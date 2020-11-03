@@ -24,9 +24,36 @@ class SudokkuSolver {
     return sudokkuTable;
   }
 
+  bool validateTable(int row, int col, int val) {
+    //check row
+    for (int i = 0; i < 9; i++) {
+      if ((i != col) && sudokkuTable[row][i] == val)
+        return false; //here only i am avoid checking same row col
+    }
+    //check col
+    for (int i = 0; i < 9; i++) {
+      if ((i != row) && sudokkuTable[i][col] == val) {
+        return false;
+      }
+    }
+    //check box
+    int rowVal = ((row ~/ 3).toInt()) * 3;
+    int colVal = ((col ~/ 3).toInt()) * 3;
+    for (int i = rowVal; i < rowVal + 3; i++) {
+      for (int j = colVal; j < colVal + 3; j++) {
+        //if same row and column as check val then leave that
+        if ((!(i == row && j == col)) && sudokkuTable[i][j] == val) {
+          return false;
+        }
+      }
+    }
+    return true;
+  }
+
   //check the row values
   bool checkRow(int row, int val) {
     for (int i = 0; i < 9; i++) {
+      //in these code i am not avoid checking for value in the same col or row or box because when i am backtracking it will check for current value it will return false the code will increment tempAns which is needed
       if (sudokkuTable[row][i] == val) return false;
     }
     return true;

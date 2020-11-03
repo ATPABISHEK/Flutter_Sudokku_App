@@ -22,12 +22,16 @@ class MyTable extends StatelessWidget {
         SizedBox(
           height: 30.0,
         ), //for some distancing
-        FloatingActionButton(
+        RaisedButton(
+          color: Theme.of(context).primaryColor,
           onPressed: () {
             resetTable(); //reset previously Typed values
             Navigator.of(context).pop();
           },
-          child: Text('Reset'),
+          child: Text(
+            'Reset',
+            style: TextStyle(color: Colors.white),
+          ),
         ),
       ]),
     );
